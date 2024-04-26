@@ -1,0 +1,35 @@
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        
+        IWebDriver driver = new ChromeDriver();
+        
+        driver.Navigate().GoToUrl("https://teste.com/login");
+        
+        IWebElement campoUsuario = driver.FindElement(By.Id("usuario"));
+        campoUsuario.SendKeys("williteste");
+
+        IWebElement campoSenha = driver.FindElement(By.Id("senha"));
+        campoSenha.SendKeys("Teste@123");
+
+        IWebElement botaoLogin = driver.FindElement(By.Id("botao-login"));
+        botaoLogin.Click();
+
+        System.Threading.Thread.Sleep(2000);
+
+        if (driver.Url.Equals("https://teste.com/dashboard"))
+        {
+            Console.WriteLine("Login feito com sucesso");
+        }
+        else
+        {
+            Console.WriteLine("Erro ao fazer Login");
+        }
+        driver.Quit();
+    }
+}

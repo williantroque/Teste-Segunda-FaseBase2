@@ -1,0 +1,41 @@
+using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using System;
+class Program
+{
+    static void Main(string[] args)
+    {
+        
+        IWebDriver driver = new ChromeDriver();
+        
+        driver.Navigate().GoToUrl("https://exemplo.com/cadastro");
+      
+        IWebElement campoNome = driver.FindElement(By.Id("nome"));
+        campoNome.SendKeys("Willian Teste Novo");
+      
+        IWebElement campoEmail = driver.FindElement(By.Id("email"));
+        campoEmail.SendKeys("teste@cenario.com");
+      
+        IWebElement campoSenha = driver.FindElement(By.Id("senha"));
+        campoSenha.SendKeys("Teste@321");
+      
+        IWebElement campoConfirmarSenha = driver.FindElement(By.Id("confirmar-senha"));
+        campoConfirmarSenha.SendKeys("Teste@321");
+       
+        IWebElement botaoCadastrar = driver.FindElement(By.Id("botao-cadastrar"));
+        botaoCadastrar.Click();
+
+        System.Threading.Thread.Sleep(2000);
+        
+        if (driver.Url.Equals("https://teste.com/home"))
+        {
+            Console.WriteLine("Cadastro feito com sucesso");
+        }
+        else
+        {
+            Console.WriteLine("Erro ao criar Cadastro");
+        }
+        // Fecha o navegador
+        driver.Quit();
+    }
+}
